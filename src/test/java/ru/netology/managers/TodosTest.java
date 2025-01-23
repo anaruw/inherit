@@ -50,7 +50,7 @@ public class TodosTest {
 
         Todos todos = new Todos();
 
-        for (Task task: testTasks) {
+        for (Task task : testTasks) {
 
             todos.add(task);
         }

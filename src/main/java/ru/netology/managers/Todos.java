@@ -31,7 +31,7 @@ public class Todos {
 
         Task[] result = new Task[0];
 
-        for (Task task: tasks) {
+        for (Task task : tasks) {
 
             if (task.matches(query)) {
 

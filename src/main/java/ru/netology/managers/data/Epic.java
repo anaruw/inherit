@@ -18,7 +18,7 @@ public class Epic extends Task {
 
         for (int i = 0; i < subtasks.length; i++) {
 
-            if(subtasks[i].contains(query)) {
+            if (subtasks[i].contains(query)) {
                 return true;
             }
         }
