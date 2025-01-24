@@ -6,6 +6,10 @@ import ru.netology.managers.data.*;
 
 public class TodosTest {
 
+    TasksTest rsc = new TasksTest();
+
+    public String query = "match";
+
     @Test
     public void shouldAddThreeTasksOfDifferentType() {
 
@@ -34,9 +38,18 @@ public class TodosTest {
     }
 
     @Test
-    public void shouldSearchRequiredTasks() {
+    public void searchIfZeroTasksCount() {
 
-        TasksTest rsc = new TasksTest();
+        Todos todos = new Todos();
+
+        Task[] expected = {};
+        Task[] actual = todos.search(query);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchRequiredTasks() {
 
         Task[] testTasks = {
                 rsc.trueSimpleTask,
@@ -56,7 +69,29 @@ public class TodosTest {
         }
 
         Task[] expected = {testTasks[0], testTasks[2], testTasks[4], testTasks[5]};
-        Task[] actual = todos.search("match");
+        Task[] actual = todos.search(query);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchNothing() {
+
+        Task[] testTasks = {
+                rsc.falseSimpleTask,
+                rsc.falseEpic,
+                rsc.falseMeeting,
+        };
+
+        Todos todos = new Todos();
+
+        for (Task task : testTasks) {
+
+            todos.add(task);
+        }
+
+        Task[] expected = {};
+        Task[] actual = todos.search(query);
 
         Assertions.assertArrayEquals(expected, actual);
     }
