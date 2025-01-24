@@ -6,9 +6,15 @@ import ru.netology.managers.data.*;
 
 public class TodosTest {
 
-    TasksTest rsc = new TasksTest();
+    TasksTest testData = new TasksTest();
 
-    public String query = "match";
+    String trueQuery = testData.trueQuery;
+    String falseQuery = "false";
+
+    Task trueSimpleTask = testData.trueSimpleTask;
+    Task trueEpic = testData.trueEpic;
+    Task trueTopicMeeting = testData.trueTopicMeeting;
+    Task trueProjectMeeting = testData.trueProjectMeeting;
 
     @Test
     public void shouldAddThreeTasksOfDifferentType() {
@@ -43,7 +49,7 @@ public class TodosTest {
         Todos todos = new Todos();
 
         Task[] expected = {};
-        Task[] actual = todos.search(query);
+        Task[] actual = todos.search(trueQuery);
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -51,25 +57,15 @@ public class TodosTest {
     @Test
     public void shouldSearchRequiredTasks() {
 
-        Task[] testTasks = {
-                rsc.trueSimpleTask,
-                rsc.falseSimpleTask,
-                rsc.trueEpic,
-                rsc.falseEpic,
-                rsc.trueTopicMeeting,
-                rsc.trueProjectMeeting,
-                rsc.falseMeeting,
-        };
-
         Todos todos = new Todos();
 
-        for (Task task : testTasks) {
+        todos.add(trueSimpleTask);
+        todos.add(trueEpic);
+        todos.add(trueTopicMeeting);
+        todos.add(trueProjectMeeting);
 
-            todos.add(task);
-        }
-
-        Task[] expected = {testTasks[0], testTasks[2], testTasks[4], testTasks[5]};
-        Task[] actual = todos.search(query);
+        Task[] expected = {trueSimpleTask, trueEpic, trueTopicMeeting, trueProjectMeeting};
+        Task[] actual = todos.search(trueQuery);
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -77,21 +73,15 @@ public class TodosTest {
     @Test
     public void shouldSearchNothing() {
 
-        Task[] testTasks = {
-                rsc.falseSimpleTask,
-                rsc.falseEpic,
-                rsc.falseMeeting,
-        };
-
         Todos todos = new Todos();
 
-        for (Task task : testTasks) {
-
-            todos.add(task);
-        }
+        todos.add(trueSimpleTask);
+        todos.add(trueEpic);
+        todos.add(trueTopicMeeting);
+        todos.add(trueProjectMeeting);
 
         Task[] expected = {};
-        Task[] actual = todos.search(query);
+        Task[] actual = todos.search(falseQuery);
 
         Assertions.assertArrayEquals(expected, actual);
     }
